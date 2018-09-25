@@ -19,4 +19,4 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(TouristicItem)
+admin.site.register(Item)

@@ -19,11 +19,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-        'TEST': {
-            'CHARSET': 'utf8',
-            'COLLATION': 'utf8_general_ci',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
     }
 }

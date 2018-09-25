@@ -1,10 +1,7 @@
 from django.conf.urls import url, include
-from django.contrib import admin
-from drfdocs.views import AuthenticatedDRFDocsView
+from recommender.urls import api_urls
 
-api_urls = []
-
-urlpatterns = [
+api_urls = [
     url(r'^api/', include(api_urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^docs/', AuthenticatedDRFDocsView.as_view(), name='drfdocs'),

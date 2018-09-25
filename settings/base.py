@@ -17,15 +17,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '8o&vao&26ulv4e&z3k-7^25+hitm-vvt^*+-kt(vtww2lg(#lg'
+WSGI_APPLICATION = 'wsgi.application'
+ROOT_URLCONF = 'urls'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'localhost:8000',]
-ROOT_URLCONF = 'urls'
-WSGI_APPLICATION = 'wsgi.application'
-APPEND_SLASH=False
+
+ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'localhost:8000', ]
+APPEND_SLASH = False
 
 
 INSTALLED_APPS = [
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'cities_light',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_docs',
     'recommender',
 ]
 
@@ -121,4 +121,4 @@ ROOT_PATH = os.path.dirname(__file__)
 
 STATIC_URL = '/api/static/'
 
-STATICFILES_DIRS = (os.path.join(ROOT_PATH, 'static'))
+STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static'), ]
