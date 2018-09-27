@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
@@ -47,9 +50,21 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
+    __change_password_token = None
+
+    # Relations
+    preferences = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Preferences'))
+    valorations = models.ManyToManyField('Valoration', blank=True, verbose_name=_('Valorations'))
 
     def __str__(self):
         return self.email
+
+    def set_change_password_token(self):
+        __change_password_token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(32))
+        return __change_password_token
+
+    def clear_change_password_token(self):
+        __change_password_token = None
 
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name
@@ -61,6 +76,41 @@ class Item(models.Model):
     description = models.TextField(blank=True, max_length=140, verbose_name=_('Description'))
     country = models.CharField(blank=True, max_length=140, verbose_name=_('Country'))
     city = models.CharField(blank=True, max_length=140, verbose_name=_('City'))
+
+    # Relations
+    types = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Types'))
+
+    def __str__(self):
+        return str(self.name)
+
+
+class ItemType(models.Model):
+
+    name = models.CharField(blank=True, max_length=140, verbose_name=_('Name'))
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Group(models.Model):
+
+    title = models.CharField(blank=True, max_length=140, verbose_name=_('Title'))
+    description = models.TextField(blank=True, max_length=140, verbose_name=_('Description'))
+
+    # Relations
+    preferences = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Preferences'))
+    valorations = models.ManyToManyField('Valoration', blank=True, verbose_name=_('Valorations'))
+    users = models.ManyToManyField('CustomUser', blank=True, verbose_name=_('Users'))
+
+    def __str__(self):
+        return str(self.title)
+
+
+class Valoration(models.Model):
+
+    comment = models.TextField(blank=True, max_length=140, verbose_name=_('Comment'))
+    score = models.CharField(blank=True, max_length=140, verbose_name=_('Score'))
+    item = models.ForeignKey('Item', on_delete=models.CASCADE, related_name='valorated_item', verbose_name=_('Valorated item'))
 
     def __str__(self):
         return str(self.id)
