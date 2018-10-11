@@ -20,3 +20,6 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Item)
+admin.site.register(ItemType)
+admin.site.register(Group)
+admin.site.register(Valoration)

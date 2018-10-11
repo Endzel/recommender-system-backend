@@ -63,6 +63,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         __change_password_token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(32))
         return __change_password_token
 
+    def change_password(self, token, password):
+        if self.__change_password_token and token == self.__change_password_token:
+            self.password = password
+            self.__change_password_token = None
+            self.save()
+            return True
+        return False
+
     def clear_change_password_token(self):
         __change_password_token = None
 
@@ -73,7 +81,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Item(models.Model):
 
     name = models.CharField(blank=True, max_length=140, verbose_name=_('Name'))
-    description = models.TextField(blank=True, max_length=140, verbose_name=_('Description'))
+    description = models.TextField(blank=True, max_length=1000, verbose_name=_('Description'))
     country = models.CharField(blank=True, max_length=140, verbose_name=_('Country'))
     city = models.CharField(blank=True, max_length=140, verbose_name=_('City'))
 
@@ -95,7 +103,7 @@ class ItemType(models.Model):
 class Group(models.Model):
 
     title = models.CharField(blank=True, max_length=140, verbose_name=_('Title'))
-    description = models.TextField(blank=True, max_length=140, verbose_name=_('Description'))
+    description = models.TextField(blank=True, max_length=1000, verbose_name=_('Description'))
 
     # Relations
     preferences = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Preferences'))
@@ -108,8 +116,8 @@ class Group(models.Model):
 
 class Valoration(models.Model):
 
-    comment = models.TextField(blank=True, max_length=140, verbose_name=_('Comment'))
-    score = models.CharField(blank=True, max_length=140, verbose_name=_('Score'))
+    comment = models.TextField(blank=True, max_length=1000, verbose_name=_('Comment'))
+    score = models.IntegerField(default=0, verbose_name=_('Score'))
     item = models.ForeignKey('Item', on_delete=models.CASCADE, related_name='valorated_item', verbose_name=_('Valorated item'))
 
     def __str__(self):
