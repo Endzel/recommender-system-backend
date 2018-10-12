@@ -45,7 +45,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(null=True, blank=True, max_length=140, verbose_name=_('Last name'))
     email = models.EmailField(unique=True, verbose_name=_('Email'))
     birth_date = models.DateField(null=True, blank=True, verbose_name=('Birth date'))
-    accepted_terms = models.BooleanField(default=True, verbose_name=_('Accepted terms'))
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     objects = CustomUserManager()
