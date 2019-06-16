@@ -1,0 +1,32 @@
+version: '3.7'
+
+networks:
+  ${STACK_NETWORK}:
+    external: false
+
+volumes:
+  db:
+
+services:
+  api:
+    image: ${STACK_NAME}
+    # command: tail -f /dev/null
+    command: bash -c "python manage.py makemigrations --settings=settings.angel && python manage.py migrate --settings=settings.angel && python manage.py runserver 0.0.0.0:8000 --settings=settings.angel"
+    volumes:
+      - ${WORKING_DIR}:/opt/recommender
+    ports:
+      - "8000:8000"
+    networks:
+      - ${STACK_NETWORK}
+
+  db:
+    image: mysql:5.6.27
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: recommender
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - ${STACK_NETWORK}
+    volumes:
+      - db:/var/lib/mysql
