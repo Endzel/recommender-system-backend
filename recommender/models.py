@@ -2,7 +2,6 @@ import random
 import string
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 from recommender import choices
@@ -25,7 +24,6 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('accepted_terms', True)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Super users must have is_staff flag activated')
@@ -41,10 +39,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-    first_name = models.CharField(null=True, blank=True, max_length=140, verbose_name=_('First name'))
-    last_name = models.CharField(null=True, blank=True, max_length=140, verbose_name=_('Last name'))
-    email = models.EmailField(unique=True, verbose_name=_('Email'))
-    birth_date = models.DateField(null=True, blank=True, verbose_name=('Birth date'))
+    first_name = models.CharField(null=True, blank=True, max_length=140, verbose_name='First name')
+    last_name = models.CharField(null=True, blank=True, max_length=140, verbose_name='Last name')
+    email = models.EmailField(unique=True, verbose_name='Email')
+    birth_date = models.DateField(null=True, blank=True, verbose_name='Birth date')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     objects = CustomUserManager()
@@ -52,8 +50,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     __change_password_token = None
 
     # Relations
-    preferences = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Preferences'))
-    valorations = models.ManyToManyField('Valoration', blank=True, verbose_name=_('Valorations'))
+    preferences = models.ManyToManyField('ItemAttribute', through="PreferenceGrade", verbose_name='Preferences')
+    context_segments = models.ManyToManyField('ContextSegment', through="UserContext", verbose_name='Context segments')
 
     def __str__(self):
         return self.email
@@ -77,47 +75,162 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name + ' ' + self.last_name
 
 
-class Item(models.Model):
+class PreferenceGrade(models.Model):
 
-    name = models.CharField(blank=True, max_length=140, verbose_name=_('Name'))
-    description = models.TextField(blank=True, max_length=1000, verbose_name=_('Description'))
-    country = models.CharField(blank=True, max_length=140, verbose_name=_('Country'))
-    city = models.CharField(blank=True, max_length=140, verbose_name=_('City'))
+    value = models.IntegerField(default=0, verbose_name='Value')
 
     # Relations
-    types = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Types'))
+    item_attribute = models.ForeignKey('ItemAttribute', on_delete=models.CASCADE, related_name='preference_grades', verbose_name='Item attribute')
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='preference_grades', verbose_name='User')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.id)
 
 
-class ItemType(models.Model):
+class UserContext(models.Model):
 
-    name = models.CharField(blank=True, max_length=140, verbose_name=_('Name'))
+    weight = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Weight')
+
+    # Relations
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='user_contexts', verbose_name='User')
+    context_segment = models.ForeignKey('ContextSegment', on_delete=models.CASCADE, related_name='user_contexts', verbose_name='Context segment')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.id)
+
+
+class Item(models.Model):
+
+    name = models.CharField(blank=True, max_length=140, verbose_name='Name')
+    description = models.TextField(blank=True, max_length=1000, verbose_name='Description')
+    date = models.DateTimeField(blank=True, verbose_name='Date')
+
+    # Relations
+    attributes = models.ManyToManyField('ItemAttribute', through="PertenanceGrade", verbose_name='Attributes')
+    city = models.ForeignKey('City', null=True, on_delete=models.SET_NULL, related_name='items', verbose_name='City')
+
+    def __str__(self):
+        return self.name
+
+
+class City(models.Model):
+
+    name = models.CharField(blank=True, max_length=140, verbose_name='Name')
+    country = models.TextField(blank=True, max_length=1000, verbose_name='Country')
+
+    def __str__(self):
+        return self.name
+
+
+class PertenanceGrade(models.Model):
+
+    value = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Value')
+
+    # Relations
+    item_attribute = models.ForeignKey('ItemAttribute', on_delete=models.CASCADE, related_name='pertenance_grades', verbose_name='Item attribute')
+    item = models.ForeignKey('Item', on_delete=models.CASCADE, related_name='pertenance_grades', verbose_name='Item')
+
+    def __str__(self):
+        return str(self.id)
+
+
+class ItemAttribute(models.Model):
+
+    name = models.CharField(blank=True, max_length=140, verbose_name='Name')
+
+    # Relations
+    category = models.ForeignKey('AttributeCategory', null=True, on_delete=models.SET_NULL, related_name='item_attributes', verbose_name='Item category')
+
+    def __str__(self):
+        return self.name
+
+
+class AttributeCategory(models.Model):
+
+    name = models.CharField(blank=True, max_length=140, verbose_name='Name')
+
+    def __str__(self):
+        return self.name
 
 
 class Group(models.Model):
 
-    title = models.CharField(blank=True, max_length=140, verbose_name=_('Title'))
-    description = models.TextField(blank=True, max_length=1000, verbose_name=_('Description'))
+    title = models.CharField(blank=True, max_length=140, verbose_name='Title')
+    description = models.TextField(blank=True, max_length=1000, verbose_name='Description')
 
     # Relations
-    preferences = models.ManyToManyField('ItemType', blank=True, verbose_name=_('Preferences'))
-    valorations = models.ManyToManyField('Valoration', blank=True, verbose_name=_('Valorations'))
-    users = models.ManyToManyField('CustomUser', blank=True, verbose_name=_('Users'))
+    users = models.ManyToManyField('CustomUser', blank=True, verbose_name='Users')
 
     def __str__(self):
-        return str(self.title)
+        return self.title
+
+
+class Recommendation(models.Model):
+
+    # Relations
+    items = models.ManyToManyField('Item', blank=True, verbose_name='Items')
+    context_segments = models.ManyToManyField('ContextSegment', verbose_name='Context segments')
+    group = models.ForeignKey('Group', on_delete=models.CASCADE, related_name='recommendations', verbose_name='Group')
+
+    def __str__(self):
+        return str(self.id)
 
 
 class Valoration(models.Model):
 
-    comment = models.TextField(blank=True, max_length=1000, verbose_name=_('Comment'))
-    score = models.IntegerField(default=0, verbose_name=_('Score'))
-    item = models.ForeignKey('Item', on_delete=models.CASCADE, related_name='valorated_item', verbose_name=_('Valorated item'))
+    comment = models.TextField(blank=True, max_length=1000, verbose_name='Comment')
+    score = models.IntegerField(default=0, verbose_name='Score')
+
+    # Relations
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='valorations', verbose_name='User')
+    item = models.ForeignKey('Item', null=True, on_delete=models.CASCADE, related_name='valorations', verbose_name='Valorated item')
+    recommendation = models.ForeignKey('Recommendation', null=True, on_delete=models.CASCADE, related_name='valorations', verbose_name='Recommendation')
+
+    def __str__(self):
+        return str(self.id)
+
+
+class ContextSegment(models.Model):
+
+    dimension = models.CharField(blank=True, max_length=140, verbose_name='Dimension')
+    domain = models.CharField(blank=True, max_length=140, verbose_name='Domain')
+
+    # Relations
+    implications = models.ManyToManyField('Implication', blank=True, verbose_name='Implications')
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Implication(models.Model):
+
+    # Relations
+    antecedents = models.ManyToManyField('ItemAttribute', blank=True, through="Antecedent", related_name='implication_antecedents', verbose_name='Antecedents')
+    consequents = models.ManyToManyField('ItemAttribute', blank=True, through="Consequent", related_name='implication_consequents', verbose_name='Consequents')
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Antecedent(models.Model):
+
+    value = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Value')
+
+    # Relations
+    item_attribute = models.ForeignKey('ItemAttribute', null=True, on_delete=models.CASCADE, related_name='antecedents_values', verbose_name='Item attribute')
+    implication = models.ForeignKey('Implication', null=True, on_delete=models.CASCADE, related_name='antecedents_values', verbose_name='Implication')
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Consequent(models.Model):
+
+    value = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Value')
+
+    # Relations
+    item_attribute = models.ForeignKey('ItemAttribute', null=True, on_delete=models.CASCADE, related_name='consequents_values', verbose_name='Item attribute')
+    implication = models.ForeignKey('Implication', null=True, on_delete=models.CASCADE, related_name='consequents_values', verbose_name='Implication')
 
     def __str__(self):
         return str(self.id)

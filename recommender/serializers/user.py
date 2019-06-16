@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
 from recommender.models import CustomUser
-from recommender.serializers.items import ItemTypeSerializer, ValorationSerializer
+from recommender.serializers.items import ItemAttributeSerializer, ValorationSerializer
 
 
 
 class UserSerializer(serializers.ModelSerializer):
 
-    preferences = ItemTypeSerializer(required=False, many=True, allow_null=True)
+    preferences = ItemAttributeSerializer(required=False, many=True, allow_null=True)
     valorations = ValorationSerializer(required=False, many=True, allow_null=True)
 
     class Meta:

@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from recommender.models import ItemType, Valoration
+from recommender.models import ItemAttribute, Valoration
 
 
 
-class ItemTypeSerializer(serializers.ModelSerializer):
+class ItemAttributeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = ItemType
+        model = ItemAttribute
         fields = '__all__'
 
 
