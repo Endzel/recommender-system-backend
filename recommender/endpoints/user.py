@@ -11,7 +11,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 
-class Login(generics.GenericAPIView):
+class LoginView(generics.GenericAPIView):
 
     permission_classes = (AllowAny,)
 
@@ -24,8 +24,7 @@ class Login(generics.GenericAPIView):
         return Response({"token": token.key}, status=status.HTTP_200_OK)
 
 
-class Logout(mixins.RetrieveModelMixin,
-             generics.GenericAPIView):
+class LogoutView(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
     permission_classes = (AllowAny,)
 
@@ -34,9 +33,7 @@ class Logout(mixins.RetrieveModelMixin,
         return Response({"success": "User logged out successfully"}, status=status.HTTP_200_OK)
 
 
-class User(mixins.RetrieveModelMixin,
-                mixins.UpdateModelMixin,
-                generics.GenericAPIView):
+class UserView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, generics.GenericAPIView):
 
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
@@ -56,8 +53,7 @@ class User(mixins.RetrieveModelMixin,
         return self.partial_update(request, *args, **kwargs)
 
 
-class Register(mixins.CreateModelMixin,
-                generics.GenericAPIView):
+class RegisterView(mixins.CreateModelMixin, generics.GenericAPIView):
 
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
@@ -66,9 +62,7 @@ class Register(mixins.CreateModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class ChangePasswordView(mixins.UpdateModelMixin,
-                            mixins.DestroyModelMixin,
-                            generics.GenericAPIView):
+class ChangePasswordView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
 
     serializer_class = ChangePasswordSerializer
 
@@ -80,12 +74,12 @@ class ChangePasswordView(mixins.UpdateModelMixin,
                 return Response({"error": "Wrong password"}, status=status.HTTP_400_BAD_REQUEST)
             user.set_password(serializer.data.get("new_password"))
             user.save()
-            return Response({"success":"Password changed"}, status=status.HTTP_200_OK)
+            return Response({"success": "Password changed"}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ForgotPassword(generics.GenericAPIView):
+class ForgotPasswordView(generics.GenericAPIView):
 
     permission_classes = (AllowAny,)
     serializer_class = ForgotPasswordSerializer
@@ -93,7 +87,7 @@ class ForgotPassword(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
         if not email:
-            return Response({"error":"Email not given"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Email not given"}, status=status.HTTP_400_BAD_REQUEST)
         user = CustomUser.objects.get(email=email)
         token = user.set_change_password_token()
         context = {
@@ -109,10 +103,10 @@ class ForgotPassword(generics.GenericAPIView):
             recipient_list=[email],
             html_message=html_message,
         )
-        return Response({"success":"Email sent with token"}, status=status.HTTP_200_OK)
+        return Response({"success": "Email sent with token"}, status=status.HTTP_200_OK)
 
 
-class RecoverPassword(generics.GenericAPIView):
+class RecoverPasswordView(generics.GenericAPIView):
 
     permission_classes = (AllowAny,)
     serializer_class = RecoverPasswordSerializer
@@ -122,10 +116,10 @@ class RecoverPassword(generics.GenericAPIView):
         token = request.data.get('token')
         email = request.data.get('email')
         if not (token and password and email):
-            return Response({"error":"Token, email or password not given"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Token, email or password not given"}, status=status.HTTP_400_BAD_REQUEST)
         user = CustomUser.objects.get(email=email)
         changed = user.change_password(token, password)
         if changed:
-            return Response({"success":"Password changed"}, status=status.HTTP_200_OK)
+            return Response({"success": "Password changed"}, status=status.HTTP_200_OK)
         else:
-            return Response({"error":"Password could not be changed. Please try again"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Password could not be changed. Please try again"}, status=status.HTTP_400_BAD_REQUEST)

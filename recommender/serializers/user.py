@@ -1,18 +1,36 @@
 from rest_framework import serializers
 
-from recommender.models import CustomUser
-from recommender.serializers.items import ItemAttributeSerializer, ValorationSerializer
+from recommender.models import CustomUser, UserContext, PreferenceGrade
+from recommender.serializers.items import ItemAttributeSerializer
+from recommender.serializers.context import ContextSegmentSerializer
 
+
+class UserContextSerializer(serializers.ModelSerializer):
+
+    context_segment = ContextSegmentSerializer()
+
+    class Meta:
+        model = UserContext
+        fields = '__all__'
+
+
+class PreferenceGradeSerializer(serializers.ModelSerializer):
+
+    item_attribute = ItemAttributeSerializer()
+
+    class Meta:
+        model = PreferenceGrade
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
 
-    preferences = ItemAttributeSerializer(required=False, many=True, allow_null=True)
-    valorations = ValorationSerializer(required=False, many=True, allow_null=True)
+    preference_grades = PreferenceGradeSerializer(required=False, many=True, allow_null=True)
+    user_contexts = UserContextSerializer(required=False, many=True, allow_null=True)
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'first_name', 'last_name', 'birth_date', 'preferences', 'valorations')
+        fields = ('id', 'first_name', 'last_name', 'birth_date', 'preference_grades', 'user_contexts')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
