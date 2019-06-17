@@ -9,7 +9,7 @@ from recommender.endpoints.context import ContextSegmentView, ImplicationView
 from recommender.endpoints.valoration import ValorationView
 
 
-urls = [
+api_urls = [
     # User
     url(r'^users$', UserView.as_view(), name='userFrontView'),
     url(r'^users/login$', csrf_exempt(LoginView.as_view()), name='loginFrontView'),
@@ -37,5 +37,4 @@ urls = [
 
     # Valoration
     url(r'^valorations$', ValorationView.as_view(), name='ValorationFrontView'),
-
 ]

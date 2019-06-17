@@ -79,6 +79,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'django.template.context_processors.media',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -144,5 +145,6 @@ USE_TZ = True
 ROOT_PATH = os.path.dirname(__file__)
 
 STATIC_URL = '/api/static/'
+MEDIA_URL = '/'
 
 STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static'), ]

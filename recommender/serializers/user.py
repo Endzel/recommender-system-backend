@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from recommender.models import CustomUser, UserContext, PreferenceGrade
-from recommender.serializers.items import ItemAttributeSerializer
+from recommender.serializers.item import ItemAttributeSerializer
 from recommender.serializers.context import ContextSegmentSerializer
 
 

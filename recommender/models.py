@@ -7,6 +7,10 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from recommender import choices
 
 
+def item_upload_to(instance, filename):
+    return 'images/' + instance.city.name + '/' + filename
+
+
 class CustomUserManager(BaseUserManager):
     def create(self, email, password, **extra_fields):
         return self.create_user(email, password, **extra_fields)
@@ -103,7 +107,10 @@ class Item(models.Model):
 
     name = models.CharField(blank=True, max_length=140, verbose_name='Name')
     description = models.TextField(blank=True, max_length=1000, verbose_name='Description')
-    date = models.DateTimeField(blank=True, verbose_name='Date')
+    date = models.DateTimeField(null=True, blank=True, verbose_name='Date')
+    image = models.ImageField(null=True, blank=True, upload_to=item_upload_to, verbose_name='Item image')
+    gps_point = models.CharField(blank=True, max_length=140, verbose_name='GPS Point')
+    weblink = models.URLField(blank=True, max_length=140, verbose_name='Web link')
 
     # Relations
     attributes = models.ManyToManyField('ItemAttribute', through="PertenanceGrade", verbose_name='Attributes')

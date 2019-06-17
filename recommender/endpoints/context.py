@@ -15,7 +15,7 @@ class ContextSegmentView(mixins.ListModelMixin, mixins.CreateModelMixin, generic
         return self.create(request, *args, **kwargs)
 
 
-class ImplicationtView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+class ImplicationView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
 
     queryset = Implication.objects.all()
     serializer_class = ImplicationSerializer
