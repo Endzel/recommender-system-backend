@@ -2,18 +2,35 @@ from django.conf import settings
 from django.contrib.auth import logout, login, authenticate
 from django.core.mail import send_mail
 from django.template.loader import get_template
+
 from recommender.models import CustomUser
 from recommender.serializers.user import UserSerializer, ForgotPasswordSerializer, RecoverPasswordSerializer, ChangePasswordSerializer, RegisterSerializer
+
 from rest_framework import status, generics, mixins
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import NotAuthenticated
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-class LoginView(generics.GenericAPIView):
+class UnsafeSessionAuthentication(SessionAuthentication):
+
+    def authenticate(self, request):
+        http_request = request._request
+        user = getattr(http_request, 'user', None)
+
+        if not user:
+            return None
+
+        return (user, None)
+
+
+class LoginView(APIView):
 
     permission_classes = (AllowAny,)
+    authentication_classes = (UnsafeSessionAuthentication,)
 
     def post(self, request, *args, **kwargs):
         user = authenticate(username=request.data.get("username"), password=request.data.get("password"))

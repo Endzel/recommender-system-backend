@@ -22,8 +22,8 @@ ROOT_URLCONF = 'urls'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'localhost:8000', ]
-ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'localhost:8000', ]
+ALLOWED_HOSTS = ['*']
+HOSTS = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,8 +42,6 @@ DATABASES = {
     }
 }
 
-
-ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'localhost:8000', ]
 APPEND_SLASH = False
 
 
@@ -54,21 +52,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cities_light',
-    'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework',
+    'cities_light',
     'recommender',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 TEMPLATES = [
@@ -125,9 +122,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 
-# CSRF options
-CSRF_COOKIE_SECURE = False
-CORS_ORIGIN_ALLOW_ALL = True
 
 # Custom user model
 AUTH_USER_MODEL = 'recommender.CustomUser'
