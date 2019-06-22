@@ -29,3 +29,19 @@ class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = '__all__'
+
+
+class CityChoicesSerializer(serializers.ModelSerializer):
+
+    key = serializers.SerializerMethodField('get_id')
+    text = serializers.SerializerMethodField('get_name')
+
+    class Meta:
+        model = City
+        fields = ('key', 'text')
+
+    def get_id(self, obj):
+        return obj.id
+
+    def get_name(self, obj):
+        return obj.name

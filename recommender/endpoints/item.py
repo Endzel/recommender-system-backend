@@ -1,5 +1,5 @@
 from recommender.models import Item, ItemAttribute, AttributeCategory, City
-from recommender.serializers.item import ItemSerializer, ItemAttributeSerializer, AttributeCategorySerializer, CitySerializer
+from recommender.serializers.item import ItemSerializer, ItemAttributeSerializer, AttributeCategorySerializer, CitySerializer, CityChoicesSerializer
 from rest_framework import generics, mixins
 
 
@@ -43,6 +43,15 @@ class CityView(mixins.ListModelMixin, generics.GenericAPIView):
 
     queryset = City.objects.all()
     serializer_class = CitySerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class CityChoicesView(mixins.ListModelMixin, generics.GenericAPIView):
+
+    queryset = City.objects.all()
+    serializer_class = CityChoicesSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

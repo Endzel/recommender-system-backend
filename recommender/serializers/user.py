@@ -61,3 +61,19 @@ class RecoverPasswordSerializer(serializers.Serializer):
 
     password = serializers.CharField(required=True)
     token = serializers.CharField(required=True)
+
+
+class UserChoicesSerializer(serializers.ModelSerializer):
+
+    key = serializers.SerializerMethodField('get_id')
+    text = serializers.SerializerMethodField('get_full_name')
+
+    class Meta:
+        model = CustomUser
+        fields = ('key', 'text')
+
+    def get_id(self, obj):
+        return obj.id
+
+    def get_full_name(self, obj):
+        return obj.first_name + ' ' + obj.last_name

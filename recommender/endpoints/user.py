@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 
 from recommender.models import CustomUser
-from recommender.serializers.user import UserSerializer, ForgotPasswordSerializer, RecoverPasswordSerializer, ChangePasswordSerializer, RegisterSerializer
+from recommender.serializers.user import UserSerializer, ForgotPasswordSerializer, RecoverPasswordSerializer, ChangePasswordSerializer, RegisterSerializer, UserChoicesSerializer
 
 from rest_framework import status, generics, mixins
 from rest_framework.authentication import SessionAuthentication
@@ -140,3 +140,12 @@ class RecoverPasswordView(generics.GenericAPIView):
             return Response({"success": "Password changed"}, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Password could not be changed. Please try again"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserChoicesView(mixins.ListModelMixin, generics.GenericAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserChoicesSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
