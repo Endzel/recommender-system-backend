@@ -56,12 +56,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'cities_light',
     'recommender',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -122,6 +124,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 
+# CSRF-CORS
+CSRF_COOKIE_SECURE = False
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    '127.0.0.1:8000'
+    'localhost:8080',
+    '127.0.0.1:8080'
+)
 
 # Custom user model
 AUTH_USER_MODEL = 'recommender.CustomUser'
