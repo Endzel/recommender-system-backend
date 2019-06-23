@@ -41,5 +41,5 @@ api_urls = [
     # Choices
     url(r'^users/choices$', UserChoicesView.as_view(), name='userChoicesFrontView'),
     url(r'^cities/choices$', CityChoicesView.as_view(), name='cityChoicesFrontView'),
-    url(r'^context_segment/choices$', ContextSegmentChoicesView.as_view(), name='contextSegmentChoicesFrontView'),
+    url(r'^context_segments/choices$', ContextSegmentChoicesView.as_view(), name='contextSegmentChoicesFrontView'),
 ]

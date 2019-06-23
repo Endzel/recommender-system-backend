@@ -76,4 +76,6 @@ class UserChoicesSerializer(serializers.ModelSerializer):
         return obj.id
 
     def get_full_name(self, obj):
+        if not obj.first_name or not obj.last_name:
+            return ''
         return obj.first_name + ' ' + obj.last_name

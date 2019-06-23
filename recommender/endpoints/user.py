@@ -38,7 +38,7 @@ class LoginView(APIView):
             return Response({"error": "Incorrect login"}, status=status.HTTP_401_UNAUTHORIZED)
         login(request, user)
         token = Token.objects.get(user=user)
-        return Response({"token": token.key}, status=status.HTTP_200_OK)
+        return Response({"token": token.key, "user": user.id}, status=status.HTTP_200_OK)
 
 
 class LogoutView(mixins.RetrieveModelMixin, generics.GenericAPIView):

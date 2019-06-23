@@ -169,7 +169,7 @@ class Group(models.Model):
     users = models.ManyToManyField('CustomUser', blank=True, verbose_name='Users')
 
     def __str__(self):
-        return self.title
+        return self.title or str(self.id)
 
 
 class Recommendation(models.Model):
