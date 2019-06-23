@@ -93,7 +93,7 @@ class PreferenceGrade(models.Model):
 
 class UserContext(models.Model):
 
-    weight = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Weight')
+    weight = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Weight')
 
     # Relations
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='user_contexts', verbose_name='User')
@@ -131,7 +131,7 @@ class City(models.Model):
 
 class PertenanceGrade(models.Model):
 
-    value = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Value')
+    value = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Value')
 
     # Relations
     item_attribute = models.ForeignKey('ItemAttribute', on_delete=models.CASCADE, related_name='pertenance_grades', verbose_name='Item attribute')
@@ -221,7 +221,7 @@ class Implication(models.Model):
 
 class Antecedent(models.Model):
 
-    value = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Value')
+    value = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Value')
 
     # Relations
     item_attribute = models.ForeignKey('ItemAttribute', null=True, on_delete=models.CASCADE, related_name='antecedents_values', verbose_name='Item attribute')
@@ -233,7 +233,7 @@ class Antecedent(models.Model):
 
 class Consequent(models.Model):
 
-    value = models.DecimalField(null=True, max_digits="10", decimal_places="2", verbose_name='Value')
+    value = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Value')
 
     # Relations
     item_attribute = models.ForeignKey('ItemAttribute', null=True, on_delete=models.CASCADE, related_name='consequents_values', verbose_name='Item attribute')
