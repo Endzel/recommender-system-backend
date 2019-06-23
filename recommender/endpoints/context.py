@@ -1,5 +1,5 @@
-from recommender.models import ContextSegment, Implication
-from recommender.serializers.context import ContextSegmentSerializer, ImplicationSerializer, ContextSegmentChoicesSerializer
+from recommender.models import ContextSegment, UserContext, Implication
+from recommender.serializers.context import ContextSegmentSerializer, UserContextSerializer, ImplicationSerializer, ContextSegmentChoicesSerializer
 from rest_framework import generics, mixins
 
 
@@ -7,6 +7,18 @@ class ContextSegmentView(mixins.ListModelMixin, mixins.CreateModelMixin, generic
 
     queryset = ContextSegment.objects.all()
     serializer_class = ContextSegmentSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class UserContextView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+
+    queryset = UserContext.objects.all()
+    serializer_class = UserContextSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

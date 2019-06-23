@@ -5,7 +5,7 @@ from recommender.endpoints.user import UserView, LoginView, LogoutView, Register
 from recommender.endpoints.group import GroupView
 from recommender.endpoints.item import ItemView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView
 from recommender.endpoints.recommendation import RecommendationView
-from recommender.endpoints.context import ContextSegmentView, ImplicationView, ContextSegmentChoicesView
+from recommender.endpoints.context import ContextSegmentView, UserContextView, ImplicationView, ContextSegmentChoicesView
 from recommender.endpoints.valoration import ValorationView
 
 
@@ -33,6 +33,7 @@ api_urls = [
 
     # Context
     url(r'^context_segments$', ContextSegmentView.as_view(), name='contextSegmentFrontView'),
+    url(r'^user_contexts$', UserContextView.as_view(), name='userContextFrontView'),
     url(r'^implications$', ImplicationView.as_view(), name='implicationFrontView'),
 
     # Valoration

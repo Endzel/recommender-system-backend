@@ -129,10 +129,12 @@ CSRF_COOKIE_SECURE = False
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:8000',
-    '127.0.0.1:8000'
+    '127.0.0.1:8000',
     'localhost:8080',
     '127.0.0.1:8080'
 )
+CSRF_HEADER_NAME = 'X-CSRFTOKEN'
+CSRF_TRUSTED_ORIGINS = ['localhost:8000', '127.0.0.1:8000', 'localhost:8080', '127.0.0.1:8080']
 
 # Custom user model
 AUTH_USER_MODEL = 'recommender.CustomUser'

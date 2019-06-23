@@ -1,12 +1,19 @@
 from rest_framework import serializers
 
-from recommender.models import ContextSegment, Implication
+from recommender.models import ContextSegment, UserContext, Implication
 
 
 class ContextSegmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ContextSegment
+        fields = '__all__'
+
+
+class UserContextSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserContext
         fields = '__all__'
 
 

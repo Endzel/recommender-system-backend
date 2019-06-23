@@ -56,7 +56,7 @@ class UserView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, generics.Gene
     serializer_class = UserSerializer
 
     def get_object(self):
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             raise NotAuthenticated()
         return self.request.user
 
