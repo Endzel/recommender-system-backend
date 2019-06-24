@@ -111,6 +111,7 @@ class Item(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to=item_upload_to, verbose_name='Item image')
     gps_point = models.CharField(blank=True, max_length=140, verbose_name='GPS Point')
     weblink = models.URLField(blank=True, max_length=140, verbose_name='Web link')
+    price = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Price')
 
     # Relations
     attributes = models.ManyToManyField('ItemAttribute', through="PertenanceGrade", verbose_name='Attributes')
