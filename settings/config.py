@@ -25,6 +25,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 ALLOWED_HOSTS = ['*']
 HOSTS = ['*']
 
+RECOMMENDER_API = "https://galactus.uma.es/sicumarecommender/"
+RECOMMENDER_API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmdlbEB0ZmdhbmdlbCIsImlhdCI6MTU2MTMyODIxMSwiZXhwIjoxNTYxNDE0NjExfQ.RSTWUIF0dIcamolHLnOA06SrAcrxbzyZInhLjmzGacI"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
