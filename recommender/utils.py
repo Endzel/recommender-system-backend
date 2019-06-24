@@ -36,3 +36,13 @@ class RequestUtils(object):
         except Exception as e:
             logging.error(str(e) + " : Post response")
             return Response({"error": "[ERROR IN POST]" + str(e)}, status=400)
+
+    @staticmethod
+    def deleteRequest(url):
+        headers = {"Content-Type": "application/json", "Accept": "application/json", "Authorization": "Bearer " + settings.RECOMMENDER_API_TOKEN}
+        try:
+            response = requests.delete(url, {}, headers=headers)
+            return response
+        except Exception as e:
+            logging.error(str(e) + " : Delete response")
+            return Response({"error": "[ERROR IN DELETE]" + str(e)}, status=400)

@@ -203,9 +203,6 @@ class ContextSegment(models.Model):
     dimension = models.CharField(blank=True, max_length=140, verbose_name='Dimension')
     domain = models.CharField(blank=True, max_length=140, verbose_name='Domain')
 
-    # Relations
-    implications = models.ManyToManyField('Implication', blank=True, verbose_name='Implications')
-
     def __str__(self):
         return str(self.id)
 
@@ -215,6 +212,7 @@ class Implication(models.Model):
     # Relations
     antecedents = models.ManyToManyField('ItemAttribute', blank=True, through="Antecedent", related_name='implication_antecedents', verbose_name='Antecedents')
     consequents = models.ManyToManyField('ItemAttribute', blank=True, through="Consequent", related_name='implication_consequents', verbose_name='Consequents')
+    context_segment = models.ForeignKey('ContextSegment', on_delete=models.CASCADE, related_name='implications', verbose_name='Context segment')
 
     def __str__(self):
         return str(self.id)

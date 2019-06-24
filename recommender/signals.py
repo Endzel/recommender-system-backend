@@ -21,7 +21,7 @@ def create_or_update_attribute_pertenance_pair(sender, instance, created=False, 
     url = settings.RECOMMENDER_API + 'recommender/saveItem?'
     params = {
         "attribute": instance.item_attribute.name,
-        "itemsset": instance.item_attribute.category.name,
+        "itemsset": instance.item.city.name,
         "name": instance.item.name,
         "system": "tfgangel",
         "value": instance.value,
