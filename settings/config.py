@@ -122,10 +122,15 @@ REST_FRAMEWORK = {
 }
 
 # Email settings
-EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
+EMAIL_ADMIN = "angeljimenez@uma.es"
+EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+
+# This two variables will need to be configures by the deployer for the emails to work properly
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
 
 # CSRF-CORS
 CSRF_COOKIE_SECURE = False

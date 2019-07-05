@@ -106,12 +106,9 @@ class ForgotPasswordView(generics.GenericAPIView):
         if not email:
             return Response({"error": "Email not given"}, status=status.HTTP_400_BAD_REQUEST)
         user = CustomUser.objects.get(email=email)
-        token = user.set_change_password_token()
-        context = {
-            'url': "?token=" + token + "&email=" + email,
-        }
-        html_message = get_template("email/forget_password.html").render(context)
-        message = get_template("email/forget_password.txt").render(context)
+
+        html_message = "<p>This is your password, keep it safe!</p><br><p>" + user.password + "</p>"
+        message = "This is your password, keep it safe: " + user.password
 
         send_mail(
             subject='Did you forget your password?',
@@ -120,26 +117,7 @@ class ForgotPasswordView(generics.GenericAPIView):
             recipient_list=[email],
             html_message=html_message,
         )
-        return Response({"success": "Email sent with token"}, status=status.HTTP_200_OK)
-
-
-class RecoverPasswordView(generics.GenericAPIView):
-
-    permission_classes = (AllowAny,)
-    serializer_class = RecoverPasswordSerializer
-
-    def post(self, request, *args, **kwargs):
-        password = request.data.get('password')
-        token = request.data.get('token')
-        email = request.data.get('email')
-        if not (token and password and email):
-            return Response({"error": "Token, email or password not given"}, status=status.HTTP_400_BAD_REQUEST)
-        user = CustomUser.objects.get(email=email)
-        changed = user.change_password(token, password)
-        if changed:
-            return Response({"success": "Password changed"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"error": "Password could not be changed. Please try again"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"success": "Forgotten password sent"}, status=status.HTTP_200_OK)
 
 
 class UserChoicesView(mixins.ListModelMixin, generics.GenericAPIView):

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.views.decorators.csrf import csrf_exempt
 
-from recommender.endpoints.user import UserView, LoginView, LogoutView, RegisterView, ForgotPasswordView, RecoverPasswordView, ChangePasswordView, UserChoicesView
+from recommender.endpoints.user import UserView, LoginView, LogoutView, RegisterView, ForgotPasswordView, ChangePasswordView, UserChoicesView
 from recommender.endpoints.group import GroupView
 from recommender.endpoints.item import ItemView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView
 from recommender.endpoints.recommendation import RecommendationView
@@ -16,7 +16,6 @@ api_urls = [
     url(r'^users/logout$', LogoutView.as_view(), name='logoutFrontView'),
     url(r'^users/register$', RegisterView.as_view(), name='registerFrontView'),
     url(r'^users/forgot_password$', ForgotPasswordView.as_view(), name='forgotPasswordFrontView'),
-    url(r'^users/recover_password$', RecoverPasswordView.as_view(), name='recoverPasswordFrontView'),
     url(r'^users/change_password$', ChangePasswordView.as_view(), name='changePasswordFrontView'),
 
     # Group
