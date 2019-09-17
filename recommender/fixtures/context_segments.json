@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "dimension": "Finalidad",
+        "domain": "Relax"
+    },
+    {
+        "id": 2,
+        "dimension": "Interés",
+        "domain": "Naturaleza"
+    },
+    {
+        "id": 3,
+        "dimension": "Interés",
+        "domain": "Cultural"
+    },
+    {
+        "id": 4,
+        "dimension": "Tipo grupal",
+        "domain": "Familiar"
+    },
+    {
+        "id": 5,
+        "dimension": "Tipo grupal",
+        "domain": "Laboral"
+    },
+    {
+        "id": 6,
+        "dimension": "Finalidad",
+        "domain": "Ocio musical"
+    },
+    {
+        "id": 7,
+        "dimension": "Finalidad",
+        "domain": "Ocio deportivo"
+    }
+]

@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "name": "Barcelona",
+        "country": "España"
+    },
+    {
+        "id": 2,
+        "name": "Madrid",
+        "country": "España"
+    },
+    {
+        "id": 3,
+        "name": "Málaga",
+        "country": "España"
+    },
+    {
+        "id": 4,
+        "name": "Londres",
+        "country": "Reino Unido"
+    },
+    {
+        "id": 5,
+        "name": "Praga",
+        "country": "República Checa"
+    },
+    {
+        "id": 6,
+        "name": "Wroclaw",
+        "country": "Polonia"
+    },
+    {
+        "id": 7,
+        "name": "París",
+        "country": "Francia"
+    },
+    {
+        "id": 8,
+        "name": "Roma",
+        "country": "Italia"
+    },
+    {
+        "id": 9,
+        "name": "Amsterdam",
+        "country": "Holanda"
+    },
+    {
+        "id": 10,
+        "name": "Berlín",
+        "country": "Alemania"
+    },
+    {
+        "id": 11,
+        "name": "Copenhague",
+        "country": "Dinamarca"
+    }
+]

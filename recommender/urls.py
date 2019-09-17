@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from recommender.endpoints.user import UserView, LoginView, LogoutView, RegisterView, ForgotPasswordView, ChangePasswordView, UserChoicesView
 from recommender.endpoints.group import GroupView
-from recommender.endpoints.item import ItemView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView
+from recommender.endpoints.item import ItemView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView, PertenanceGradeView
 from recommender.endpoints.recommendation import RecommendationView, RecommendationSingleView
 from recommender.endpoints.context import ContextSegmentView, UserContextView, RecommendationContextView, ImplicationView, ContextSegmentChoicesView
 from recommender.endpoints.valoration import ValorationView
@@ -25,6 +25,7 @@ api_urls = [
     url(r'^items$', ItemView.as_view(), name='itemFrontView'),
     url(r'^item_attributes$', ItemAttributeView.as_view(), name='itemAttributeFrontView'),
     url(r'^attribute_categories$', AttributeCategoryView.as_view(), name='attributeCategoryFrontView'),
+    url(r'^pertenance_grades$', PertenanceGradeView.as_view(), name='pertenanceGradeFrontView'),
     url(r'^cities$', CityView.as_view(), name='cityFrontView'),
 
     # Recommendation

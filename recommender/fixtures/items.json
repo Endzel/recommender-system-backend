@@ -1,0 +1,134 @@
+[
+    {
+        "id": 1,
+        "name": "Sagrada Familia",
+        "description": "El Templo Expiatorio de la Sagrada Familia, conocido simplemente como la Sagrada Familia, es una basílica católica de Barcelona, diseñada por el arquitecto Antoni Gaudí. Iniciada en 1882, todavía está en construcción. Es la obra maestra de Gaudí, y el máximo exponente de la arquitectura modernista catalana.",
+        "date": "2019-06-17T17:21:05Z",
+        "image": "http://localhost:8000/images/Barcelona/sagrada_familia_1.jpg",
+        "gps_point": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1540.161734936208!2d2.1739641944663832!3d41.4037899436054!2m3!1f0!2f0!3f0",
+        "weblink": "https://sagradafamilia.org/",
+        "price": "25.00",
+        "city": 1,
+        "attributes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Arc del Triomf",
+        "description": "El Arco de Triunfo es un monumento situado en la confluencia entre el paseo de Lluís Companys, el paseo de San Juan y la ronda de San Pedro, en la ciudad de Barcelona. Fue diseñado por el arquitecto José Vilaseca como entrada principal a la Exposición Universal de Barcelona de 1888.",
+        "date": "2019-06-23T22:47:02Z",
+        "image": "http://localhost:8000/images/Barcelona/275px-Paris_July_2011-30.jpg",
+        "gps_point": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.218896144142!2d2.17845621542592!3d41.3910523792639!2m3!1f0!2f0!3f0!3m2!1i1024!2i7",
+        "weblink": "https://www.barcelonaturisme.com/wv3/es/page/1211/arco-del-triunfo.html",
+        "price": "0.00",
+        "city": 1,
+        "attributes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Zoo de Barcelona",
+        "description": "El Parque Zoológico de Barcelona es un zoológico situado en el parque de la Ciudadela, en Barcelona. Se eligió su emplazamiento debido a que los edificios del parque estaban disponibles tras la Exposición Universal de Barcelona de 1888.",
+        "date": "2019-06-23T22:49:16Z",
+        "image": "http://localhost:8000/images/Barcelona/barcelona-zoo.jpg",
+        "gps_point": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.436179447258!2d2.1876689154257676!3d41.38633297926433!2m3!1f0!2f0!3f0!3m2!1i1024!",
+        "weblink": "https://www.zoobarcelona.cat/es/",
+        "price": "35.00",
+        "city": 1,
+        "attributes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Museo Nacional de Arte de Catalunya",
+        "description": "El Museo Nacional de Arte de Cataluña, también conocido por sus siglas MNAC, está situado en la ciudad de Barcelona. Destaca por su colección de arte Románico, considerada una de las más completas del mundo. Su director es Josep Serra i Villalba.",
+        "date": "2019-06-23T22:51:34Z",
+        "image": null,
+        "gps_point": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.2598013521915!2d2.151381315425203!3d41.36843987926596!2m3!1f0!2f0!3f0!3m2!1i1024!",
+        "weblink": "https://www.museunacional.cat/es",
+        "price": "15.00",
+        "city": 1,
+        "attributes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Liceo",
+        "description": "El Gran Teatro del Liceo de Barcelona, conocido como El Liceo, es el teatro en activo más antiguo y prestigioso de Barcelona, especialmente como teatro de ópera, entre los que es considerado uno de los más importantes del mundo.",
+        "date": "2019-06-23T22:54:02Z",
+        "image": "http://localhost:8000/images/Barcelona/77c38f1597f84296a15e0796f361bdb0.jpg",
+        "gps_point": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.7186578872347!2d2.1711061154255686!3d41.380196879264794!2m3!1f0!2f0!3f0!3m2!1i102",
+        "weblink": "https://www.liceubarcelona.cat",
+        "price": "150.00",
+        "city": 1,
+        "attributes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Parque Güell",
+        "description": "El parque Güell es un parque público con jardines y elementos arquitectónicos situado en la parte superior de la ciudad de Barcelona. Se halla en la vertiente meridional del monte Carmelo, que pertenece a las estribaciones de la sierra de Collserola; en la cara septentrional se halla el parque del Carmelo.",
+        "date": "2019-06-23T22:55:05Z",
+        "image": "http://localhost:8000/images/Barcelona/8323e86a33ac433db7de788f3e2a7792.jpg",
+        "gps_point": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.139296539412!2d2.150505815426634!3d41.414494779261744!2m3!1f0!2f0!3f0!3m2!1i1024!",
+        "weblink": "https://parkguell.barcelona/",
+        "price": "10.00",
+        "city": 1,
+        "attributes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Bunkers del Carmel",
+        "description": "Disfruta de unas magníficas vistas de Barcelona desde los famosos bunkers.",
+        "date": null,
+        "image": "http://localhost:8000/images/Barcelona/con-los-amigos-en-bunkers-del-carmel.jpg",
+        "gps_point": "",
+        "weblink": "",
+        "price": "0.00",
+        "city": 1,
+        "attributes": []
+    }
+]

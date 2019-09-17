@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "first_name": "Ángel",
+        "last_name": "Jiménez",
+        "birth_date": null,
+        "preference_grades": [],
+        "user_contexts": [],
+        "is_staff": true
+    },
+    {
+        "id": 2,
+        "first_name": "Carlos",
+        "last_name": "Fernández",
+        "birth_date": "1994-11-14",
+        "preference_grades": [],
+        "user_contexts": [],
+        "is_staff": true
+    },
+    {
+        "id": 3,
+        "first_name": "Alfred",
+        "last_name": "N'Diaye",
+        "birth_date": "1992-02-22",
+        "preference_grades": [],
+        "user_contexts": [],
+        "is_staff": false
+    },
+    {
+        "id": 4,
+        "first_name": "Tomeu",
+        "last_name": "Nadal",
+        "birth_date": "1988-07-13",
+        "preference_grades": [],
+        "user_contexts": [],
+        "is_staff": false
+    },
+    {
+        "id": 5,
+        "first_name": "Ada",
+        "last_name": "Colau",
+        "birth_date": "1978-09-23",
+        "preference_grades": [],
+        "user_contexts": [],
+        "is_staff": false
+    },
+    {
+        "id": 6,
+        "first_name": "Ángel",
+        "last_name": "De la Torre",
+        "birth_date": "2019-06-25",
+        "preference_grades": [],
+        "user_contexts": [],
+        "is_staff": true
+    }
+]

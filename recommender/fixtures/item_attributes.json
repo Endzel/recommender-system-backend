@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Precio",
+        "category": 1
+    },
+    {
+        "id": 2,
+        "name": "Valor cultural",
+        "category": 2
+    },
+    {
+        "id": 3,
+        "name": "Concurrencia",
+        "category": 3
+    },
+    {
+        "id": 4,
+        "name": "Centricidad",
+        "category": 3
+    },
+    {
+        "id": 5,
+        "name": "Ocio musical",
+        "category": 2
+    },
+    {
+        "id": 6,
+        "name": "Actividad deportiva",
+        "category": 2
+    },
+    {
+        "id": 7,
+        "name": "Naturaleza",
+        "category": 2
+    }
+]
