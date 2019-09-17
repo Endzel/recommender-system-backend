@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'first_name', 'last_name', 'birth_date', 'preference_grades', 'user_contexts')
+        fields = ('id', 'first_name', 'last_name', 'birth_date', 'preference_grades', 'user_contexts', 'is_staff')
 
 
 class RegisterSerializer(serializers.ModelSerializer):

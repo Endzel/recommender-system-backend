@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ['*']
 HOSTS = ['*']
 
 RECOMMENDER_API = "https://galactus.uma.es/sicumarecommender/"
-RECOMMENDER_API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmdlbEB0ZmdhbmdlbCIsImlhdCI6MTU2MTMyODIxMSwiZXhwIjoxNTYxNDE0NjExfQ.RSTWUIF0dIcamolHLnOA06SrAcrxbzyZInhLjmzGacI"
+RECOMMENDER_API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmdlbEB0ZmdhbmdlbCIsImlhdCI6MTU2ODcxMjQ5NiwiZXhwIjoxNTY4Nzk4ODk2fQ.HtV-PNilkE4vGu0vehE9cuHy_rwDiTZq1euYb05BKnU"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,7 +128,7 @@ EMAIL_ADMIN = "angeljimenez@uma.es"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
-# This two variables will need to be configures by the deployer for the emails to work properly
+# This two variables will need to be configured by the deployer for the emails to work properly
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 

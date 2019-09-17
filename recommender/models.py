@@ -4,8 +4,6 @@ import string
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
-from recommender import choices
-
 
 def item_upload_to(instance, filename):
     return 'images/' + instance.city.name + '/' + filename
@@ -175,10 +173,25 @@ class Group(models.Model):
 
 class Recommendation(models.Model):
 
+    start_date = models.DateField(null=True, blank=True, verbose_name='Start date')
+    end_date = models.DateField(null=True, blank=True, verbose_name='End date')
+
     # Relations
     items = models.ManyToManyField('Item', blank=True, verbose_name='Items')
-    context_segments = models.ManyToManyField('ContextSegment', verbose_name='Context segments')
+    context = models.OneToOneField('RecommendationContext', on_delete=models.CASCADE, related_name='recommendations', verbose_name='Context')
     group = models.ForeignKey('Group', on_delete=models.CASCADE, related_name='recommendations', verbose_name='Group')
+    city = models.ForeignKey('City', on_delete=models.CASCADE, related_name='recommendations', verbose_name='City')
+
+    def __str__(self):
+        return str(self.id)
+
+
+class RecommendationContext(models.Model):
+
+    weight = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Weight')
+
+    # Relations
+    context_segment = models.ForeignKey('ContextSegment', on_delete=models.CASCADE, related_name='group_contexts', verbose_name='Context segment')
 
     def __str__(self):
         return str(self.id)
@@ -204,7 +217,7 @@ class ContextSegment(models.Model):
     domain = models.CharField(blank=True, max_length=140, verbose_name='Domain')
 
     def __str__(self):
-        return str(self.id)
+        return self.dimension + " - " + self.domain
 
 
 class Implication(models.Model):

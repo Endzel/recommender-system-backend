@@ -4,8 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from recommender.endpoints.user import UserView, LoginView, LogoutView, RegisterView, ForgotPasswordView, ChangePasswordView, UserChoicesView
 from recommender.endpoints.group import GroupView
 from recommender.endpoints.item import ItemView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView
-from recommender.endpoints.recommendation import RecommendationView
-from recommender.endpoints.context import ContextSegmentView, UserContextView, ImplicationView, ContextSegmentChoicesView
+from recommender.endpoints.recommendation import RecommendationView, RecommendationSingleView
+from recommender.endpoints.context import ContextSegmentView, UserContextView, RecommendationContextView, ImplicationView, ContextSegmentChoicesView
 from recommender.endpoints.valoration import ValorationView
 
 
@@ -29,10 +29,12 @@ api_urls = [
 
     # Recommendation
     url(r'^recommendations$', RecommendationView.as_view(), name='recommendationFrontView'),
+    url(r'^recommendations/(?P<pk>.+)$', RecommendationSingleView.as_view(), name='recommendationFrontView'),
 
     # Context
     url(r'^context_segments$', ContextSegmentView.as_view(), name='contextSegmentFrontView'),
     url(r'^user_contexts$', UserContextView.as_view(), name='userContextFrontView'),
+    url(r'^recommendation_contexts$', RecommendationContextView.as_view(), name='recommendationContextFrontView'),
     url(r'^implications$', ImplicationView.as_view(), name='implicationFrontView'),
 
     # Valoration
