@@ -105,7 +105,6 @@ class Item(models.Model):
 
     name = models.CharField(blank=True, max_length=140, verbose_name='Name')
     description = models.TextField(blank=True, max_length=1000, verbose_name='Description')
-    date = models.DateTimeField(null=True, blank=True, verbose_name='Date')
     image = models.ImageField(null=True, blank=True, upload_to=item_upload_to, verbose_name='Item image')
     gps_point = models.CharField(blank=True, max_length=140, verbose_name='GPS Point')
     weblink = models.URLField(blank=True, max_length=140, verbose_name='Web link')
