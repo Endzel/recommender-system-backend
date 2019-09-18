@@ -131,5 +131,5 @@ def generate_recommendation(sender, instance, created=False, **kwargs):
     if result_json:
         for item in result_json:
             i = Item.objects.filter(name__iexact=item['name'])
-            if i.exists():
+            if i.exists() and instance.items.count() <= 5:
                 instance.items.add(i.last().pk)
