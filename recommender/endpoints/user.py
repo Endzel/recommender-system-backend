@@ -73,6 +73,7 @@ class UserView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, generics.Gene
 class RegisterView(mixins.CreateModelMixin, generics.GenericAPIView):
 
     permission_classes = (AllowAny,)
+    authentication_classes = (UnsafeSessionAuthentication,)
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
