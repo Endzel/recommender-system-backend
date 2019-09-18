@@ -79,7 +79,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class PreferenceGrade(models.Model):
 
-    value = models.IntegerField(default=0, verbose_name='Value')
+    value = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Value')
 
     # Relations
     item_attribute = models.ForeignKey('ItemAttribute', on_delete=models.CASCADE, related_name='preference_grades', verbose_name='Item attribute')
