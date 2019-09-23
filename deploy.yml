@@ -10,8 +10,8 @@ volumes:
 services:
   api:
     image: ${STACK_NAME}
-    # command: tail -f /dev/null
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: tail -f /dev/null
+    # command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ${WORKING_DIR}:/opt/recommender
     ports:

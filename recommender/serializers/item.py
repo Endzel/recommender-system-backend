@@ -3,7 +3,16 @@ from rest_framework import serializers
 from recommender.models import Item, ItemAttribute, AttributeCategory, City, PertenanceGrade
 
 
+class CitySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = City
+        fields = '__all__'
+
+
 class ItemSerializer(serializers.ModelSerializer):
+
+    city = CitySerializer(required=False)
 
     class Meta:
         model = Item
@@ -21,13 +30,6 @@ class AttributeCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AttributeCategory
-        fields = '__all__'
-
-
-class CitySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = City
         fields = '__all__'
 
 

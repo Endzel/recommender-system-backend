@@ -106,7 +106,7 @@ class Item(models.Model):
     name = models.CharField(blank=True, max_length=140, verbose_name='Name')
     description = models.TextField(blank=True, max_length=1000, verbose_name='Description')
     image = models.ImageField(null=True, blank=True, upload_to=item_upload_to, verbose_name='Item image')
-    gps_point = models.CharField(blank=True, max_length=140, verbose_name='GPS Point')
+    gps_point = models.TextField(blank=True, verbose_name='GPS Point')
     weblink = models.URLField(blank=True, max_length=140, verbose_name='Web link')
     price = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Price')
 
