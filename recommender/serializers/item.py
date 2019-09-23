@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from recommender.models import Item, ItemAttribute, AttributeCategory, City, PertenanceGrade
+from recommender.serializers.valoration import ValorationSerializer
+
+from recommender.models import Item, ItemAttribute, AttributeCategory, City, PertenanceGrade, Valoration
 
 
 class CitySerializer(serializers.ModelSerializer):
@@ -13,10 +15,17 @@ class CitySerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
 
     city = CitySerializer(required=False)
+    valoration = serializers.SerializerMethodField(required=False, method_name="get_my_valoration")
 
     class Meta:
         model = Item
         fields = '__all__'
+
+    def get_my_valoration(self, obj):
+        valoration = Valoration.objects.filter(user=self.context['request'].user, item=obj)
+        if valoration.exists():
+            return ValorationSerializer(valoration.first()).data
+        return None
 
 
 class ItemAttributeSerializer(serializers.ModelSerializer):

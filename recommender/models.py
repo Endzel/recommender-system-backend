@@ -199,7 +199,7 @@ class RecommendationContext(models.Model):
 class Valoration(models.Model):
 
     comment = models.TextField(blank=True, max_length=1000, verbose_name='Comment')
-    score = models.IntegerField(default=0, verbose_name='Score')
+    score = models.DecimalField(null=True, max_digits=10, decimal_places=2, verbose_name='Score')
 
     # Relations
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='valorations', verbose_name='User')

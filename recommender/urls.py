@@ -6,7 +6,7 @@ from recommender.endpoints.group import GroupView
 from recommender.endpoints.item import ItemView, ItemSingleView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView, PertenanceGradeView
 from recommender.endpoints.recommendation import RecommendationView, RecommendationSingleView
 from recommender.endpoints.context import ContextSegmentView, UserContextView, RecommendationContextView, ImplicationView, ContextSegmentChoicesView
-from recommender.endpoints.valoration import ValorationView
+from recommender.endpoints.valoration import ValorationView, ValorationSingleView
 
 
 api_urls = [
@@ -41,6 +41,7 @@ api_urls = [
 
     # Valoration
     url(r'^valorations$', ValorationView.as_view(), name='valorationFrontView'),
+    url(r'^valorations/(?P<pk>.+)$', ValorationSingleView.as_view(), name='valorationSingleFrontView'),
 
     # Choices
     url(r'^users/choices$', UserChoicesView.as_view(), name='userChoicesFrontView'),
