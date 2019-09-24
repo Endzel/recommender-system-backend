@@ -10,8 +10,8 @@ class RecommendationView(mixins.ListModelMixin, mixins.CreateModelMixin, generic
     serializer_class = RecommendationSerializer
 
     def get_queryset(self):
-        g = Group.objects.filter(users__in=[self.request.user])
-        return Recommendation.objects.filter(group__in=[g])
+        g = Group.objects.filter(users__in=[self.request.user.id])
+        return Recommendation.objects.filter(group__in=g)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
