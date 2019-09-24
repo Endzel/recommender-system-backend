@@ -18,6 +18,16 @@ class CustomUserAdmin(admin.ModelAdmin):
         super(CustomUserAdmin, self).save_model(request, obj, form, change)
 
 
+class ImplicationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'context_segment', 'preview_antecedents', 'preview_consequents')
+
+    def preview_antecedents(self, obj):
+        return "\n".join([str(i) for i in obj.antecedents_values.all()])
+
+    def preview_consequents(self, obj):
+        return "\n".join([str(i) for i in obj.consequents_values.all()])
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Item)
 admin.site.register(ItemAttribute)
@@ -26,10 +36,11 @@ admin.site.register(Valoration)
 admin.site.register(ContextSegment)
 admin.site.register(Recommendation)
 admin.site.register(City)
-admin.site.register(Implication)
+admin.site.register(Implication, ImplicationAdmin)
 admin.site.register(Antecedent)
 admin.site.register(Consequent)
 admin.site.register(UserContext)
 admin.site.register(AttributeCategory)
 admin.site.register(PertenanceGrade)
 admin.site.register(PreferenceGrade)
+admin.site.register(RecommendationContext)

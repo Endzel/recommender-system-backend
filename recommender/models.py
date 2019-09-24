@@ -86,7 +86,7 @@ class PreferenceGrade(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='preference_grades', verbose_name='User')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.user) + " prefers " + str(self.item_attribute) + " with " + str(self.value)
 
 
 class UserContext(models.Model):
@@ -98,7 +98,7 @@ class UserContext(models.Model):
     context_segment = models.ForeignKey('ContextSegment', on_delete=models.CASCADE, related_name='user_contexts', verbose_name='Context segment')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.weight) + " for " + str(self.user) + " in " + str(self.context_segment)
 
 
 class Item(models.Model):
@@ -136,7 +136,7 @@ class PertenanceGrade(models.Model):
     item = models.ForeignKey('Item', on_delete=models.CASCADE, related_name='pertenance_grades', verbose_name='Item')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.item) + " has " + str(self.value) + " in " + str(self.item_attribute)
 
 
 class ItemAttribute(models.Model):
@@ -193,7 +193,7 @@ class RecommendationContext(models.Model):
     context_segment = models.ForeignKey('ContextSegment', on_delete=models.CASCADE, related_name='group_contexts', verbose_name='Context segment')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.weight) + " in " + str(self.context_segment)
 
 
 class Valoration(models.Model):
@@ -207,6 +207,10 @@ class Valoration(models.Model):
     recommendation = models.ForeignKey('Recommendation', null=True, on_delete=models.CASCADE, related_name='valorations', verbose_name='Recommendation')
 
     def __str__(self):
+        if self.item:
+            return "Valoration of " + str(self.score) + " for item " + str(self.item)
+        if self.recommendation:
+            return "Valoration of " + str(self.score) + " for recommendation " + str(self.recommendation)
         return str(self.id)
 
 
@@ -239,7 +243,7 @@ class Antecedent(models.Model):
     implication = models.ForeignKey('Implication', null=True, on_delete=models.CASCADE, related_name='antecedents_values', verbose_name='Implication')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.value) + " in " + str(self.item_attribute)
 
 
 class Consequent(models.Model):
@@ -251,4 +255,4 @@ class Consequent(models.Model):
     implication = models.ForeignKey('Implication', null=True, on_delete=models.CASCADE, related_name='consequents_values', verbose_name='Implication')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.value) + " in " + str(self.item_attribute)
