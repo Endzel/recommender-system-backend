@@ -10,4 +10,4 @@ Aplicar los cambios del esquema en la base de datos:
 - python manage.py migrate
 
 Iniciar servidor:
-- python manage.py runserver
+- python manage.py runserver 0.0.0.0:8000
