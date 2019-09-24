@@ -3,8 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from recommender.endpoints.user import UserView, LoginView, LogoutView, RegisterView, ForgotPasswordView, ChangePasswordView, UserChoicesView
 from recommender.endpoints.group import GroupView, GroupSingleView
-from recommender.endpoints.item import ItemView, ItemSingleView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView, PertenanceGradeView
-from recommender.endpoints.recommendation import RecommendationView, RecommendationSingleView
+from recommender.endpoints.item import ItemView, ItemSingleView, ItemValoratedView, ItemAttributeView, AttributeCategoryView, CityView, CityChoicesView, PertenanceGradeView
+from recommender.endpoints.recommendation import RecommendationView, RecommendationSingleView, RecommendationValoratedView
 from recommender.endpoints.context import ContextSegmentView, UserContextView, UserContextSingleView, RecommendationContextView, ImplicationView, ContextSegmentChoicesView
 from recommender.endpoints.valoration import ValorationView, ValorationSingleView
 
@@ -24,6 +24,7 @@ api_urls = [
 
     # Item
     url(r'^items$', ItemView.as_view(), name='itemFrontView'),
+    url(r'^items/valorated$', ItemValoratedView.as_view(), name='itemValoratedFrontView'),
     url(r'^items/(?P<pk>.+)$', ItemSingleView.as_view(), name='itemSingleFrontView'),
     url(r'^item_attributes$', ItemAttributeView.as_view(), name='itemAttributeFrontView'),
     url(r'^attribute_categories$', AttributeCategoryView.as_view(), name='attributeCategoryFrontView'),
@@ -32,6 +33,7 @@ api_urls = [
 
     # Recommendation
     url(r'^recommendations$', RecommendationView.as_view(), name='recommendationFrontView'),
+    url(r'^recommendations/valorated$', RecommendationValoratedView.as_view(), name='RecommendationValoratedFrontView'),
     url(r'^recommendations/(?P<pk>.+)$', RecommendationSingleView.as_view(), name='recommendationFrontView'),
 
     # Context

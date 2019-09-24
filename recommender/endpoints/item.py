@@ -24,6 +24,18 @@ class ItemSingleView(mixins.RetrieveModelMixin, generics.GenericAPIView):
         return self.retrieve(request, *args, **kwargs)
 
 
+class ItemValoratedView(mixins.ListModelMixin, generics.GenericAPIView):
+
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def get_queryset(self):
+        return Item.objects.filter(valorations__user=self.request.user).distinct()
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
 class ItemAttributeView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
 
     queryset = ItemAttribute.objects.all()

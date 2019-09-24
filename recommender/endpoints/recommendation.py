@@ -32,3 +32,15 @@ class RecommendationSingleView(mixins.RetrieveModelMixin, mixins.UpdateModelMixi
     def patch(self, request, *args, **kwargs):
         self.serializer_class = RecommendationCreateSerializer
         return self.update(request, *args, **kwargs)
+
+
+class RecommendationValoratedView(mixins.ListModelMixin, generics.GenericAPIView):
+
+    queryset = Recommendation.objects.all()
+    serializer_class = RecommendationSerializer
+
+    def get_queryset(self):
+        return Recommendation.objects.filter(valorations__user=self.request.user).distinct()
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
