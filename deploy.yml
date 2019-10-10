@@ -30,3 +30,10 @@ services:
       - ${STACK_NETWORK}
     volumes:
       - db:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+    networks:
+      - ${STACK_NETWORK}
