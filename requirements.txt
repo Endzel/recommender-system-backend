@@ -4,7 +4,7 @@ click==6.7
 coreapi==2.3.3
 coreschema==0.0.4
 dateutils==0.6.6
-Django==2.2.13
+Django==2.2.24
 django-autoslug==1.9.3
 django-autoslug-iplweb==1.9.4.dev0
 django-chroniker==1.0.10
