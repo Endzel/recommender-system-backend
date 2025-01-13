@@ -42,7 +42,7 @@ toposort==1.5
 Unidecode==1.0.22
 uritemplate==3.0.0
 urllib3==1.26.19
-virtualenv==16.0.0
+virtualenv==20.26.6
 virtualenv-clone==0.3.0
 virtualenvwrapper==4.8.2
 virtualenvwrapper-win==1.2.5
