@@ -1,4 +1,4 @@
-Django==5.2.12
+Django==5.2.13
 django-cities-light==3.10.2
 django-cors-headers==4.8.0
 djangorestframework==3.16.1
