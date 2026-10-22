@@ -20,12 +20,10 @@ services:
       - ${STACK_NETWORK}
 
   db:
-    image: mysql:5.6.27
+    image: mysql:8.4
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: recommender
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     networks:
       - ${STACK_NETWORK}
     volumes:
